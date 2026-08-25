@@ -1,7 +1,7 @@
 # Bootcamp Bob para el SDLC — Banco ACME
 ### Caso de negocio: Simulador de Crédito
 
-Este bootcamp enseña al equipo de tecnología de Banco ACME a usar **IBM Bob** a lo largo de **todo el ciclo de vida de desarrollo de software (SDLC)** — no solo como autocompletado de código — usando un caso de negocio real: el **Simulador de Crédito** descrito en el PRD adjunto (`/prd/PRD_Simulador_de_Credito_v2.pdf`).
+Este bootcamp muestra a equipos de tecnología a usar **IBM Bob** a lo largo de **todo el ciclo de vida de desarrollo de software (SDLC)** — no solo como autocompletado de código — usando un caso de negocio real: el **Simulador de Crédito** descrito en el PRD adjunto (`/prd/PRD_Simulador_de_Credito_v2.pdf`).
 
 El PRD **no se reescribe**: es la fuente de verdad de negocio, tal como llegaría de Producto en un banco real. A partir de ahí, el mismo caso avanza laboratorio por laboratorio — Planning → Requerimientos → Diseño → Desarrollo → Testing → Deployment → Mantenimiento — hasta convertirse en una aplicación funcional real, construida con Bob, versionada en GitHub y diseñada en Figma.
 
@@ -17,7 +17,7 @@ El PRD **no se reescribe**: es la fuente de verdad de negocio, tal como llegarí
 
 Léela antes del Lab 01 — resuelve la duda más común del bootcamp: "¿esto lo escribo yo o lo escribe Bob?"
 
-**`artefactos/`** — insumos que ya existen antes de empezar el lab (plantillas, PRD, OpenAPI, tarifario semilla). Nunca se crean durante el lab, solo se leen o se mencionan con `@`.
+**`artefactos/`** y **`prd/`** — insumos que ya existen antes de empezar el lab (plantillas, PRD, OpenAPI, tarifario semilla). Nunca se crean durante el lab, solo se leen o se mencionan con `@`.
 
 **Entregables** — crea cada archivo cuando el paso del lab lo indique y guárdalo
 en `simulador-credito-banco-acme`, dentro de `docs/` o del código correspondiente.
@@ -32,11 +32,6 @@ en `simulador-credito-banco-acme`, dentro de `docs/` o del código correspondien
 
 El bootcamp usa **Ask deliberadamente en varios labs** para mostrar cuándo conviene explorar sin riesgo de modificar nada — no es un accidente ni algo que "falta corregir". La regla que sí es fija: **cuando un paso en Ask termina necesitando guardar un archivo, el traspaso a Plan/Agent ocurre en el paso inmediatamente siguiente, en el mismo chat** (el cambio de modo con `Ctrl+.` no pierde el historial de la conversación — Bob conserva el contexto de lo que acaban de hablar en Ask). Nunca queda un resultado de Ask "flotando" varios pasos antes de guardarse — eso fue el problema real, no el uso de Ask en sí. Cuando el paso sí pide copiar algo manualmente en vez de cambiar de modo, lo dice explícitamente ("copia la respuesta...").
 
-## Configuración de Bob que evoluciona con el bootcamp
-
-El Lab 00 crea una regla global en `~/.bob/rules/`. En el Lab 01 se crea
-`AGENTS.md` en el proyecto y se versiona en Git; los Labs 07 y 08 lo amplían con
-criterios de QA y release.
 
 | Capacidad | Dónde se practica | Resultado esperado |
 |---|---|---|
