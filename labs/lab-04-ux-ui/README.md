@@ -43,6 +43,9 @@ Abre `output/frontend/`. El entregable contiene un proyecto inicial Vite, React
 y TypeScript con la estructura y los componentes generados desde el contexto de
 Figma. Revísalo para reconocer pantallas, componentes, estilos y tipos.
 
+Si prefieres descargarlo como archivo comprimido, usa [Descargar el frontend
+(ZIP)](https://github.com/jaimcuev/bob-bootcamp/raw/refs/heads/main/labs/lab-04-ux-ui/output/frontend.zip).
+
 Trátalo como un prototipo inicial. No es el contrato de la API ni la fuente de
 verdad de las fórmulas financieras. Si incluye cálculos en el navegador, tasas o
 datos de fallback, son parte de la demostración y deberán sustituirse en el Lab
