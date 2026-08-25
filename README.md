@@ -1,7 +1,7 @@
 # Bootcamp Bob para el SDLC — Banco ACME
 ### Caso de negocio: Simulador de Crédito
 
-Este bootcamp enseña al equipo de tecnología de Banco ACME a usar **IBM Bob** a lo largo de **todo el ciclo de vida de desarrollo de software (SDLC)** — no solo como autocompletado de código — usando un caso de negocio real: el **Simulador de Crédito** descrito en el PRD adjunto (`/prd/PRD_Simulador_de_Credito_v2.pdf`).
+Este bootcamp muestra a equipos de tecnología a usar **IBM Bob** a lo largo de **todo el ciclo de vida de desarrollo de software (SDLC)** — no solo como autocompletado de código — usando un caso de negocio real: el **Simulador de Crédito** descrito en el PRD adjunto (`/prd/PRD_Simulador_de_Credito_v2.pdf`).
 
 El PRD **no se reescribe**: es la fuente de verdad de negocio, tal como llegaría de Producto en un banco real. A partir de ahí, el mismo caso avanza laboratorio por laboratorio — Planning → Requerimientos → Diseño → Desarrollo → Testing → Deployment → Mantenimiento — hasta convertirse en una aplicación funcional real, construida con Bob, versionada en GitHub y diseñada en Figma.
 
@@ -17,7 +17,7 @@ El PRD **no se reescribe**: es la fuente de verdad de negocio, tal como llegarí
 
 Léela antes del Lab 01 — resuelve la duda más común del bootcamp: "¿esto lo escribo yo o lo escribe Bob?"
 
-**`artefactos/`** — insumos que ya existen antes de empezar el lab (plantillas, PRD, OpenAPI, tarifario semilla). Nunca se crean durante el lab, solo se leen o se mencionan con `@`.
+**`artefactos/`** y **`prd/`** — insumos que ya existen antes de empezar el lab (plantillas, PRD, OpenAPI, tarifario semilla). Nunca se crean durante el lab, solo se leen o se mencionan con `@`.
 
 **Entregables** — crea cada archivo cuando el paso del lab lo indique y guárdalo
 en `simulador-credito-banco-acme`, dentro de `docs/` o del código correspondiente.
@@ -30,13 +30,8 @@ en `simulador-credito-banco-acme`, dentro de `docs/` o del código correspondien
 | **Plan** | Sí | Para producir un documento/artefacto directamente — Bob edita/crea el archivo cuando el prompt se lo pide. |
 | **Agent** | Sí (además de `Execute`) | Para escribir código y correr comandos — se usa en los labs 04-07 donde ya existe el repo. |
 
-El bootcamp usa **Ask deliberadamente en varios labs** para mostrar cuándo conviene explorar sin riesgo de modificar nada — no es un accidente ni algo que "falta corregir". La regla que sí es fija: **cuando un paso en Ask termina necesitando guardar un archivo, el traspaso a Plan/Agent ocurre en el paso inmediatamente siguiente, en el mismo chat** (el cambio de modo con `Ctrl+.` no pierde el historial de la conversación — Bob conserva el contexto de lo que acaban de hablar en Ask). Nunca queda un resultado de Ask "flotando" varios pasos antes de guardarse — eso fue el problema real, no el uso de Ask en sí. Cuando el paso sí pide copiar algo manualmente en vez de cambiar de modo, lo dice explícitamente ("copia la respuesta...").
+El bootcamp usa **Ask deliberadamente en varios labs** para mostrar cuándo conviene explorar sin riesgo de modificar nada — no es un accidente ni algo que "falta corregir". La regla que sí es fija: **cuando un paso en Ask termina necesitando guardar un archivo, el traspaso a Plan/Agent ocurre en el paso inmediatamente siguiente, en el mismo chat** (el cambio de modo con `Ctrl+.` no pierde el historial de la conversación — Bob conserva el contexto de lo que acaban de hablar en Ask). Cuando el paso sí pide copiar algo manualmente en vez de cambiar de modo, lo dice explícitamente ("copia la respuesta...").
 
-## Configuración de Bob que evoluciona con el bootcamp
-
-El Lab 00 crea una regla global en `~/.bob/rules/`. En el Lab 01 se crea
-`AGENTS.md` en el proyecto y se versiona en Git; los Labs 07 y 08 lo amplían con
-criterios de QA y release.
 
 | Capacidad | Dónde se practica | Resultado esperado |
 |---|---|---|
@@ -67,10 +62,8 @@ Guarda allí los entregables y el código.
 ## Prerrequisitos antes de empezar
 
 1. Acceso a **Bob IDE** con licencia activa para el equipo.
-2. Cuenta de **GitHub** con permisos para crear un repositorio en la organización de Banco ACME (o un repo personal/sandbox para el bootcamp).
-3. Workspace de **Figma** compartido con el equipo.
-4. Node.js 18+ instalado localmente (para los Labs 04–08).
-5. Haber leído el PRD (`/prd/PRD_Simulador_de_Credito_v2.pdf`) al menos una vez antes del Lab 01.
+2. Cuenta de **GitHub** con permisos para crear un repositorio.
+3. Node.js 18+ instalado localmente (para los Labs 04–08).
 
 ## Glosario de roles (Banco ACME)
 
@@ -101,8 +94,7 @@ Guarda allí los entregables y el código.
 | 08 | [Deployment / Release](labs/lab-08-deployment-release/README.md) | Despliegue | DevOps | Agent | CI, release notes y rollback |
 | 09 | [Mantenimiento y Operación](labs/lab-09-mantenimiento-operacion/README.md) | Mantenimiento | SRE / PO | Ask → Agent | Postmortem y backlog v2 |
 
-Salvo el Lab 00, cada lab consume los documentos creados en el proyecto durante el
-lab anterior. El bootcamp se recorre en orden.
+Salvo el Lab 00, cada lab consume los documentos creados en el proyecto durante el lab anterior. El bootcamp se recorre en orden.
 
 ## Referencias externas
 
@@ -113,7 +105,5 @@ lab anterior. El bootcamp se recorre en orden.
 ## Checklist personal
 
 - [ ] Tengo acceso a Bob IDE antes del Lab 00; GitHub y Figma antes del Lab 01.
-- [ ] `AGENTS.md` no contiene secretos y está versionado en el repositorio del proyecto.
 - [ ] Puedo abrir el PRD (`/prd/PRD_Simulador_de_Credito_v2.pdf`) desde el workspace.
 - [ ] Completé los entregables indicados antes de continuar al siguiente lab.
-- [ ] Revisé Bobalytics al terminar el Lab 09.

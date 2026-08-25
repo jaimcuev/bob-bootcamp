@@ -42,8 +42,6 @@ Crea una regla global para Bob con lo siguiente:
 
 Cuando Bob termine, confirma que se creó la regla global.
 
-> No incluyas secretos. Las reglas específicas de cálculo, UX, QA y release se
-> definen en los Skills y en los pasos de los labs correspondientes.
 
 ### Paso 2 — Comprobar la regla (modo Ask)
 

@@ -34,7 +34,7 @@ La persona facilitadora muestra el flujo en video:
 3. Solicita a Bob generar el código inicial de la interfaz.
 4. Muestra el resultado generado y cómo se organizó como frontend.
 
-Este paso es una demostración: los participantes no necesitan repetir la
+Este paso es una demostración: no necesitan repetir la
 integración ni regenerar el código durante el lab.
 
 ### Paso 2 — Revisar el frontend entregado
@@ -46,7 +46,7 @@ Figma. Revísalo para reconocer pantallas, componentes, estilos y tipos.
 Si prefieres descargarlo como archivo comprimido, usa [Descargar el frontend
 (ZIP)](https://github.com/jaimcuev/bob-bootcamp/raw/refs/heads/main/labs/lab-04-ux-ui/output/frontend.zip).
 
-Trátalo como un prototipo inicial. No es el contrato de la API ni la fuente de
+Trátalo como un prototipo inicial del frontend. No es el contrato de la API ni la fuente de
 verdad de las fórmulas financieras. Si incluye cálculos en el navegador, tasas o
 datos de fallback, son parte de la demostración y deberán sustituirse en el Lab
 06 por las respuestas del backend.
@@ -61,7 +61,7 @@ sea necesaria y conectará el formulario a `POST /api/simulaciones`.
 
 ## Comprobación antes de continuar
 
-- El video demuestra la integración Bob–Figma y la generación de código.
+- El video demuestra la integración entre Bob y Figma y la generación de código.
 - Existe `output/frontend/` con el frontend generado.
 - Se entiende que la integración real, el reemplazo de cálculos locales y las
   mejoras de la interfaz se realizan en el Lab 06.
