@@ -1,0 +1,12 @@
+{
+  "productos": [
+    { "codigo": "CONSUMO", "nombre": "Crédito al Consumo", "teaMinima": 0.1599, "teaMaxima": 1.1413, "permitePeriodoGracia": true, "permiteCuotasDobles": true },
+    { "codigo": "AUTOMOTRIZ", "nombre": "Crédito Automotriz", "teaMinima": 0.4000, "teaMaxima": 1.1413, "permitePeriodoGracia": false, "permiteCuotasDobles": false },
+    { "codigo": "COMERCIAL", "nombre": "Crédito Comercial", "teaMinima": 0.4500, "teaMaxima": 1.1413, "permitePeriodoGracia": false, "permiteCuotasDobles": false },
+    { "codigo": "HIPOTECARIO", "nombre": "Crédito Hipotecario", "teaMinima": 0.0980, "teaMaxima": 0.1490, "permitePeriodoGracia": false, "permiteCuotasDobles": false }
+  ],
+  "seguroDesgravamen": [
+    { "modalidad": "SIN_DEVOLUCION", "tasaMensual": 0.0040 },
+    { "modalidad": "CON_DEVOLUCION", "tasaMensual": 0.0072 }
+  ]
+}

@@ -1,0 +1,610 @@
+// ─── Layout tokens (directos, sin depender del orden de carga de @carbon/react) ──
+@use '@carbon/react/scss/colors' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+
+// ──────────────────────────────────────────────────────────────────────────────
+// Dimensiones del diseño Figma (1143px total):
+//   HeroPanel   : 380px  (izquierda, fija, oscura)
+//   ContentArea : 763px  (derecha, blanca, scrollable)
+// ──────────────────────────────────────────────────────────────────────────────
+$hero-width: 380px;
+$content-width: 763px;
+$frame-total:  1143px;
+
+// Colores del diseño ACME (extraídos del Figma)
+$acme-hero-bg:   #161616;   // gray-100 — fondo hero panel
+$acme-teal:      #009d9a;   // color del eyebrow en el hero
+$acme-accent:    #f1c21b;   // barra amarilla inferior del hero
+$acme-blue:      #0f62fe;   // $blue-60 — links, títulos de tarjetas
+$acme-card-bg:   #e8f1ff;   // $blue-10 — fondo de product cards
+$acme-gray-60:   #525252;   // texto secundario
+$acme-white:     #ffffff;
+
+// ── Carga de Carbon (estilos de componentes) ya importada por index.scss ──────
+
+// ── Shell wrapper ─────────────────────────────────────────────────────────────
+.sim-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: $layer-01;
+}
+
+.sim-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: $spacing-08;
+}
+
+// ── Header ────────────────────────────────────────────────────────────────────
+// Fondo blanco (extraído del Figma: headerFill: #ffffff)
+.sim-header.cds--header {
+  background-color: $acme-white;
+  border-bottom: 1px solid $border-subtle-01;
+
+  .cds--header__name {
+    color: $text-primary;
+
+    &:hover { background-color: $layer-hover-01; }
+  }
+
+  .cds--header__global .cds--header__action {
+    color: $text-primary;
+
+    &:hover { background-color: $layer-hover-01; }
+  }
+}
+
+// ── Main layout — side by side ────────────────────────────────────────────────
+// El Header de Carbon tiene position:fixed y 48px de alto — compensamos con padding-top
+.sim-main {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  min-height: calc(100vh - 48px - 44px); // total - header - footer
+  margin-top: 48px; // compensa el header fixado de Carbon
+}
+
+// ── Hero Panel (columna izquierda, fija) ──────────────────────────────────────
+.sim-hero {
+  position: sticky;
+  top: 48px;               // queda pegado justo debajo del header
+  height: calc(100vh - 48px);
+  width: $hero-width;
+  min-width: $hero-width;
+  flex-shrink: 0;
+  background-color: $acme-hero-bg;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.sim-hero__illustration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.8;
+
+  svg {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.sim-hero__content {
+  position: relative;
+  z-index: 1;
+  padding: 28px;            // paddingLeft=28 del Figma
+  padding-bottom: 40px;
+}
+
+.sim-hero__eyebrow {
+  display: block;
+  color: $acme-teal;        // #009d9a — extraído del Figma
+  font-size: 0.75rem;       // 12px
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: $spacing-04;
+}
+
+.sim-hero__title {
+  color: $acme-white;
+  font-size: 1.75rem;       // 28px — fontSize del Figma
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 0 0 $spacing-05;
+}
+
+.sim-hero__body {
+  color: rgba($acme-white, 0.75);
+  font-size: 0.875rem;      // 14px
+  line-height: 1.5;
+  margin: 0;
+  max-width: 324px;         // width de StepText en Figma
+}
+
+.sim-hero__accent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;              // altura de AccentBar en Figma
+  background-color: $acme-accent;
+}
+
+// ── Content Area (columna derecha, scrollable) ────────────────────────────────
+.sim-content {
+  flex: 1;
+  min-width: 0;
+  background-color: $acme-white;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: calc(100vh - 48px);
+  // siempre mostrar scrollbar para evitar layout shift
+  scrollbar-gutter: stable;
+}
+
+// ── Advisor Ribbon (producto seleccionado) ────────────────────────────────────
+.sim-advisor-ribbon {
+  background-color: $layer-02;       // fondo gris sutil — diferencia del área de formulario
+  border-bottom: 1px solid $border-subtle-01;
+  padding: 0 36px;                   // paddingLeft=36px del Figma (StepForm)
+  height: 38px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.sim-advisor-ribbon__label {
+  font-size: 0.875rem;               // 14px
+  font-weight: 600;
+  color: $text-primary;
+  letter-spacing: 0.01em;
+}
+
+// ── Step Form ─────────────────────────────────────────────────────────────────
+.sim-step-form {
+  padding: 28px 36px 24px;           // paddingTop=28, paddingLeft/Right=36 del Figma
+  flex: 1;
+}
+
+// Progress Indicator
+.sim-progress {
+  margin-bottom: $spacing-06;
+
+  .cds--progress-step {
+    min-width: 80px;
+
+    .cds--progress-label {
+      white-space: nowrap;
+    }
+  }
+}
+
+// Step content container
+.sim-step-content {
+  margin-top: $spacing-06;
+}
+
+// ── Shared step title header ──────────────────────────────────────────────────
+.step-title-header {
+  margin-bottom: $spacing-07;
+
+  h3 {
+    font-size: 1.25rem;   // 20px — heading alineado al Figma
+    font-weight: 400;
+    line-height: 1.3;
+    color: $text-primary;
+    margin: 0 0 $spacing-03;
+  }
+}
+
+.step-subtitle {
+  color: $acme-gray-60;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+// Labels en mayúsculas (alineados al diseño Figma)
+.field-label-upper {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $text-secondary;
+  font-weight: 600;
+}
+
+.required-mark {
+  color: $support-error;
+  margin-left: $spacing-01;
+}
+
+// ── Action Footer ─────────────────────────────────────────────────────────────
+// paddingLeft/Right=36, height=80, SPACE_BETWEEN (del Figma ActionFooter)
+// position:sticky para que siempre sea visible sin scroll adicional
+.sim-action-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-05 36px;
+  height: 80px;
+  border-top: 1px solid $border-subtle-01;
+  background-color: $acme-white;
+  gap: $spacing-04;
+  flex-shrink: 0;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}
+
+// ── Bottom Advisor Ribbon (paso 4) ────────────────────────────────────────────
+.sim-bottom-ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $spacing-05;
+  padding: $spacing-05 36px;
+  height: auto;
+  min-height: 72px;
+  background-color: $acme-white;
+  border-top: 1px solid $border-subtle-01;
+}
+
+.sim-bottom-ribbon__text {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-02;
+}
+
+.sim-bottom-ribbon__heading {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.sim-bottom-ribbon__sub {
+  font-size: 0.875rem;
+  color: $acme-gray-60;
+}
+
+.sim-bottom-ribbon__actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-04;
+}
+
+// ── Footer ────────────────────────────────────────────────────────────────────
+.sim-footer {
+  // fondo blanco, texto gris, altura=44px del Figma
+  background-color: $acme-white;
+  border-top: 1px solid $border-subtle-01;
+  height: 44px;
+  padding: 0 $spacing-07;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: $text-secondary;
+  flex-shrink: 0;
+
+  &__right {
+    color: $text-placeholder;
+  }
+}
+
+// ── Step 1 — Product Cards ────────────────────────────────────────────────────
+.step1-producto {
+  .product-grid {
+    margin-top: $spacing-05;
+  }
+}
+
+.product-card {
+  cursor: pointer;
+  border: 1px solid $border-subtle-01;
+  background-color: $layer-01;
+  padding: $spacing-05;
+  border-radius: 2px;
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+  margin-bottom: $spacing-05;
+  min-height: 90px;
+
+  &:hover {
+    background-color: $acme-card-bg;
+    border-color: $blue-40;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+
+  &--selected {
+    background-color: $acme-card-bg !important;
+    border-color: $acme-blue !important;
+    border-width: 2px !important;
+    box-shadow: 0 2px 6px rgba(15, 98, 254, 0.15);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $focus;
+    outline-offset: 2px;
+  }
+}
+
+.product-card__content {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-05;
+}
+
+.product-card__icon-wrap {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: $acme-blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-card__icon { color: $text-inverse; fill: $text-inverse; }
+.product-card__text { flex: 1; }
+
+.product-card__title {
+  font-size: 1rem;
+  color: $acme-blue;
+  font-weight: 600;
+  margin-bottom: $spacing-02;
+  line-height: 1.3;
+}
+
+.product-card__desc  { color: $acme-gray-60; font-size: 0.875rem; line-height: 1.43; }
+.product-card__check { flex-shrink: 0; color: $acme-blue; margin-top: 2px; }
+.product-card__badge { margin-top: $spacing-03; }
+
+// ── Step 2 — Condiciones ──────────────────────────────────────────────────────
+.step2-condiciones .conditions-grid {
+  row-gap: $spacing-05;
+}
+
+// Fix for FormGroup + DatePicker nested labels
+.step2-condiciones {
+  .cds--form-group {
+    margin-bottom: 0;
+  }
+  .cds--date-picker {
+    width: 100%;
+    .cds--date-picker-container {
+      width: 100%;
+    }
+    .cds--date-picker__input {
+      width: 100%;
+    }
+  }
+}
+
+.plazo-switcher {
+  .cds--content-switcher {
+    width: 100%;
+  }
+  .cds--content-switcher-btn {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+// ── Step 3 — Personalización ──────────────────────────────────────────────────
+.insurance-toggle-section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-04;
+  padding: $spacing-06;
+  background-color: $layer-02;
+  border: 1px solid $border-subtle-01;
+  border-radius: 4px;
+  margin-bottom: $spacing-06;
+}
+
+.insurance-desc { color: $text-secondary; font-size: 0.875rem; }
+
+.insurance-tile-group { margin-bottom: $spacing-06; }
+
+.insurance-tile {
+  padding: $spacing-05 !important;
+  margin-bottom: $spacing-04 !important;
+
+  &.cds--radio-tile--checked {
+    border-color: $acme-blue !important;
+    background-color: $acme-card-bg;
+  }
+}
+
+.insurance-tile__content {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-03;
+}
+
+.insurance-tile__title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.insurance-tile__rate {
+  color: $text-secondary;
+  display: block;
+  margin-top: $spacing-02;
+  font-size: 0.75rem;
+}
+
+// ── Step 4 — Resultado ────────────────────────────────────────────────────────
+.step4-resultado {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-06;
+}
+
+// Summary hero card — fondo oscuro (#161616) como en el Figma
+.summary-hero-card {
+  background-color: $acme-hero-bg;
+  border-radius: 4px;
+  padding: $spacing-07;
+}
+
+.summary-hero-card__inner {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-03;
+}
+
+.summary-hero-card__label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba($acme-white, 0.6);
+}
+
+.summary-hero-card__amount {
+  display: flex;
+  align-items: baseline;
+  gap: $spacing-02;
+}
+
+.summary-hero-card__currency {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: $acme-white;
+}
+
+.summary-hero-card__value {
+  font-size: 3rem;      // 48px del Figma — prominente en la tarjeta
+  font-weight: 300;
+  line-height: 1.05;
+  color: $acme-white;
+  letter-spacing: -0.02em;
+}
+
+.summary-hero-card__tem {
+  font-size: 0.75rem;
+  color: rgba($acme-white, 0.6);
+}
+
+// Breakdown grid
+.breakdown-grid {
+  background-color: $layer-02;
+  border: 1px solid $border-subtle-01;
+  border-radius: 4px;
+  padding: $spacing-05;
+}
+
+.breakdown-item {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-02;
+  padding: $spacing-04 $spacing-03;
+  border-right: 1px solid $border-subtle-01;
+
+  &:last-child, &:nth-child(3n) { border-right: none; }
+}
+
+.breakdown-item__label {
+  font-size: 0.625rem;   // 10px del Figma
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $text-secondary;
+}
+
+.breakdown-item__value {
+  font-size: 0.8125rem;  // 13px del Figma
+  font-weight: 600;
+  color: $text-primary;
+
+  &--highlight { color: $acme-blue; }
+}
+
+// Schedule link
+.schedule-link-row {
+  display: flex;
+  align-items: center;
+  padding: $spacing-04 0;
+  border-top: 1px solid $border-subtle-01;
+  border-bottom: 1px solid $border-subtle-01;
+}
+
+.schedule-link { font-size: 1rem; }
+
+.legal-notice { border-left: 4px solid $support-warning !important; }
+
+.export-row {
+  display: flex;
+  gap: $spacing-04;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+// ── Cronograma Modal ──────────────────────────────────────────────────────────
+.cronograma-modal .cds--modal-container {
+  max-width: 1100px;
+  width: 95vw;
+}
+
+// ── Responsive ────────────────────────────────────────────────────────────────
+@media (max-width: 900px) {
+  .sim-main {
+    flex-direction: column;
+  }
+
+  .sim-hero {
+    position: relative;
+    top: 0;
+    height: auto;
+    min-height: 200px;
+    width: 100%;
+    min-width: 0;
+    justify-content: flex-end;
+  }
+
+  .sim-content {
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .sim-action-footer {
+    flex-wrap: wrap;
+    height: auto;
+    padding: $spacing-05;
+  }
+
+  .sim-bottom-ribbon {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sim-footer {
+    flex-direction: column;
+    height: auto;
+    padding: $spacing-04 $spacing-05;
+    gap: $spacing-02;
+    text-align: center;
+
+    &__right { color: $text-placeholder; }
+  }
+
+  .breakdown-item {
+    border-right: none;
+    border-bottom: 1px solid $border-subtle-01;
+    &:last-child { border-bottom: none; }
+  }
+}

@@ -1,0 +1,95 @@
+openapi: 3.0.3
+info:
+  title: Tarifario API (mock)
+  description: >
+    Servicio mock que simula el sistema real de Banco ACME donde Riesgos/Tesorería
+    publica y versiona las tasas TEA y las tasas de seguro de desgravamen.
+    El Simulador de Crédito consume este servicio en modo solo-lectura;
+    NO se conecta al core bancario (fuera de alcance del PRD fase 1).
+  version: "1.0.0"
+servers:
+  - url: https://mock.banco-acme.local/tarifario/v1
+paths:
+  /productos:
+    get:
+      summary: Lista las líneas de producto disponibles con sus tasas TEA
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Producto"
+              example:
+                - codigo: CONSUMO
+                  nombre: Crédito al Consumo
+                  teaMinima: 0.1599
+                  teaMaxima: 1.1413
+                  permitePeriodoGracia: true
+                  permiteCuotasDobles: true
+                - codigo: AUTOMOTRIZ
+                  nombre: Crédito Automotriz
+                  teaMinima: 0.4000
+                  teaMaxima: 1.1413
+                  permitePeriodoGracia: false
+                  permiteCuotasDobles: false
+                - codigo: COMERCIAL
+                  nombre: Crédito Comercial
+                  teaMinima: 0.4500
+                  teaMaxima: 1.1413
+                  permitePeriodoGracia: false
+                  permiteCuotasDobles: false
+                - codigo: HIPOTECARIO
+                  nombre: Crédito Hipotecario
+                  teaMinima: 0.0980
+                  teaMaxima: 0.1490
+                  permitePeriodoGracia: false
+                  permiteCuotasDobles: false
+  /seguro-desgravamen:
+    get:
+      summary: Tasas mensuales de seguro de desgravamen por modalidad
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ModalidadSeguro"
+              example:
+                - modalidad: SIN_DEVOLUCION
+                  tasaMensual: 0.0040
+                - modalidad: CON_DEVOLUCION
+                  tasaMensual: 0.0072
+components:
+  schemas:
+    Producto:
+      type: object
+      properties:
+        codigo:
+          type: string
+          enum: [CONSUMO, AUTOMOTRIZ, COMERCIAL, HIPOTECARIO]
+        nombre:
+          type: string
+        teaMinima:
+          type: number
+          format: double
+        teaMaxima:
+          type: number
+          format: double
+        permitePeriodoGracia:
+          type: boolean
+        permiteCuotasDobles:
+          type: boolean
+    ModalidadSeguro:
+      type: object
+      properties:
+        modalidad:
+          type: string
+          enum: [SIN_DEVOLUCION, CON_DEVOLUCION]
+        tasaMensual:
+          type: number
+          format: double

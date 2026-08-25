@@ -1,0 +1,73 @@
+openapi: 3.0.3
+info:
+  title: Contacto Asesor Comercial API (mock)
+  description: >
+    Servicio mock que simula el sistema de asignación de leads a asesores
+    comerciales de Banco ACME. El Simulador de Crédito lo invoca cuando el
+    cliente prospecto hace clic en "Hablar con un asesor" (RF-17 del PRD).
+  version: "1.0.0"
+servers:
+  - url: https://mock.banco-acme.local/contacto-asesor/v1
+paths:
+  /leads:
+    post:
+      summary: Crea un lead de contacto comercial con el contexto de la simulación
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LeadRequest"
+            example:
+              productoCodigo: CONSUMO
+              montoFinanciado: 10000
+              plazoMeses: 12
+              cuotaEstimada: 950.00
+              nombreContacto: null
+              canalOrigen: WEB
+      responses:
+        "201":
+          description: Lead creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LeadResponse"
+              example:
+                leadId: "LD-000123"
+                estado: PENDIENTE_ASIGNACION
+                creadoEn: "2026-08-19T15:00:00Z"
+        "400":
+          description: Datos de la simulación inválidos o incompletos
+components:
+  schemas:
+    LeadRequest:
+      type: object
+      required: [productoCodigo, montoFinanciado, plazoMeses, cuotaEstimada, canalOrigen]
+      properties:
+        productoCodigo:
+          type: string
+          enum: [CONSUMO, AUTOMOTRIZ, COMERCIAL, HIPOTECARIO]
+        montoFinanciado:
+          type: number
+        plazoMeses:
+          type: integer
+        cuotaEstimada:
+          type: number
+        nombreContacto:
+          type: string
+          nullable: true
+          description: Fuera de alcance del MVP (ver Lab 02, supuestos-y-decisiones.md)
+        canalOrigen:
+          type: string
+          enum: [WEB, APP, ASESOR]
+    LeadResponse:
+      type: object
+      properties:
+        leadId:
+          type: string
+        estado:
+          type: string
+          enum: [PENDIENTE_ASIGNACION, ASIGNADO]
+        creadoEn:
+          type: string
+          format: date-time

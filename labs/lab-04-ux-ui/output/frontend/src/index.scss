@@ -1,0 +1,16 @@
+// Tema por defecto Carbon (white)
+@use '@carbon/react/scss/theme' with (
+  $theme: (
+    interactive: #0f62fe,
+    focus: #0f62fe,
+  )
+);
+
+// Estilos de todos los componentes Carbon (incluye reset)
+@use '@carbon/react';
+
+// Fuentes IBM Plex Sans desde el paquete Carbon
+@use '@carbon/react/scss/fonts' as *;
+
+// Estilos propios del simulador
+@use './styles/simulador';
